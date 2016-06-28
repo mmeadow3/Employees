@@ -47,7 +47,7 @@ Operations.prototype = new Job ("Operations");
 // Start off with a Department function. Then create two other functions named FieldOffice, 
 // and Headquarters that have Department on their prototype chain.
 function Department (dept) {
-	this.deptName = [];
+	this.deptName = (dept);
 }
 
 function FieldOffice (city) {
@@ -55,26 +55,36 @@ function FieldOffice (city) {
 }
 
 function Headquarters () {
-	this.Headquarters = "Nashville";
+	this.headquarters = "Nashville";
 }
-FieldOffice.prototype = new Department ();
-Headquarters.prototype = new Department ();
+FieldOffice.prototype = new Department ("FieldOffice");
+Headquarters.prototype = new Department ("Headquarters");
 
 ///////////create new employee//////////////////////////
 var mikeM = new Employee("Mike", "Meadows");	/////////gives out first and last name;
-mikeM.Job = new Clinician("Brain Surgeon");
-mikeM.FieldOffice = new FieldOffice("Nashville");
-console.log("person:", mikeM);
+mikeM.job = new Clinician("Brain Surgeon");
+mikeM.department = new FieldOffice("Chicago");
+// console.log("person1:", mikeM);
+console.log(`${mikeM.firstName} ${mikeM.lastName} works as a ${mikeM.job.jobname} in the ${mikeM.department.city} ${mikeM.department.deptName} is a ${mikeM.job.expertise}.` );
+
 
 var DrewD = new Employee("Drew", "Davis");	/////////gives out first and last name;
-DrewD.Job = new Clinician("Brain Surgeon");
-DrewD.FieldOffice = new FieldOffice("Nashville");
-console.log("person:", DrewD);
+DrewD.job = new Operations("IT Head");
+DrewD.department = new Headquarters ();
+// console.log("person2:", DrewD);
+console.log(`${DrewD.firstName} ${DrewD.lastName} works as a ${DrewD.job.jobname} in the ${DrewD.department.headquarters} ${DrewD.department.deptName} and works as the ${DrewD.job.responsibility}.`);
 
 var GiannaC = new Employee("Gianna", "C");	/////////gives out first and last name;
-GiannaC.Job = new Clinician("Brain Surgeon");
-GiannaC.FieldOffice = new FieldOffice("Nashville");
-console.log("person:", GiannaC);
+GiannaC.job = new Clinician("Nurse");
+GiannaC.department = new FieldOffice("Nashville");
+// console.log("person3:", GiannaC);
+console.log(`${GiannaC.firstName} ${GiannaC.lastName} works as a ${GiannaC.job.jobname} in the ${GiannaC.department.city} ${GiannaC.department.deptName} is a ${GiannaC.job.expertise}.`);
+
+var JoeyM = new Employee("Joey", "Mckeez");	/////////gives out first and last name;
+JoeyM.job = new Operations("Finance");
+JoeyM.department = new FieldOffice("Nashville");
+// console.log("person4:", JoeyM);
+console.log(`${JoeyM.firstName} ${JoeyM.lastName} works as a ${JoeyM.job.jobname} in the ${JoeyM.department.city} ${JoeyM.department.deptName} and works in ${JoeyM.job.responsibility}.`);
 
 
 
